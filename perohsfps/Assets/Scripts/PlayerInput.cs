@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerInput  : MonoBehaviour 
 {
-    public float x,y;
-    public bool jumping, sprinting, crouching;
+    [HideInInspector] public float x,y;
+    [HideInInspector] public bool jumping, sprinting, crouching;
 
     void Update() 
     {

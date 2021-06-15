@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class FPSCamera : MonoBehaviour
 {
+    public Transform playerHead;
     public Transform player;
 
     [Range(0.1f, 100f)]
@@ -18,7 +19,7 @@ public class FPSCamera : MonoBehaviour
     void Update()
     {
         // Snap camera to player
-        gameObject.transform.position = player.transform.position;
+        gameObject.transform.position = playerHead.transform.position;
 
         Look();
     }
@@ -36,7 +37,7 @@ public class FPSCamera : MonoBehaviour
         xRotation -= mouse[1];
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        player.Rotate(Vector3.up * mouse[0]);
         transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0f);
+        player.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
     }
 }
