@@ -607,6 +607,7 @@ MonoBehaviour:
   jumping: 0
   sprinting: 0
   crouching: 0
+  keys: 
 --- !u!114 &1755134618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,10 +620,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defccf5f358da1548b8b3fcb9d13d83d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 70
-  maxSpeed: 200
-  extraGravity: 0
-  jumpForce: 60
+  moveSpeed: 5
+  maxSpeed: 10
+  movementMultiplier: 10
+  airMultiplier: 0.5
+  extraGravity: 1000
+  jumpForce: 35
   groundMask:
     serializedVersion: 2
     m_Bits: 64

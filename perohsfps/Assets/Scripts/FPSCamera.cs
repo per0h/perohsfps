@@ -18,7 +18,7 @@ public class FPSCamera : MonoBehaviour
 
     void Update()
     {
-        // Snap camera to player
+        // Position camera in player
         gameObject.transform.position = playerHead.transform.position;
 
         Look();
@@ -31,7 +31,6 @@ public class FPSCamera : MonoBehaviour
         Vector2 mouse = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * (sens*sensMultiplier);
 
         // Find current view rotation and add mouse movement
-        // Note: Could just put this on the rotation
         float desiredX = gameObject.transform.localRotation.eulerAngles.y + mouse[0];
         
         xRotation -= mouse[1];
