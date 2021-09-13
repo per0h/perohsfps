@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+// Thank you Plai and DaniDev for the help
+
 public class PlayerMovement : MonoBehaviour
 {
 
@@ -10,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private float playerHeight;
 
     [Header("Movement")]
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveSpeed; // Serialized so I can see current speed in playmode, don't change
     public float movementMultiplier = 10f;
     public float airMultiplier = 0.5f;
     public float extraGravity = 10f;
@@ -25,14 +27,14 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 8f;
 
     [Header("Ground Detection")]
-    public Transform groundCheck;
+    [SerializeField] Transform groundCheck;
     public LayerMask groundMask;
-    bool isGrounded;
+    public bool isGrounded { get; private set; }
     float groundDistance = 0.4f;
 
     [Header("Drag")]
     public float groundDrag = 6f;
-    public float airDrag = 2f;
+    public float airDrag = 1f;
 
     [Header("Slope")]
     private Vector3 slopeMoveDirection;
@@ -54,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         // to-do: improve ground checks + add slope support
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        // to-do: move this to a better place instead of straight up update
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
 
         OnSlope();
@@ -68,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         // Change drag when on air vs on ground
         ControlDrag(groundDrag, airDrag);
 
-        // Jumping (obviously)
+        // Jumping
         if (pInput.jumping && isGrounded) { Jump(); }
     }
 
@@ -87,16 +88,23 @@ public class PlayerMovement : MonoBehaviour
         ControlSpeed();
 
         // Determine movement speed and directon, and multiply by air multiplier if player is not grounded
-        // note: clean this
-        Vector3 movement;
+        // + slope handling
+        Vector3 movement = new Vector3();
         if(isGrounded && !OnSlope()) { movement = moveDirection.normalized * moveSpeed * movementMultiplier; }
-        else if (isGrounded && OnSlope()) { movement = slopeMoveDirection.normalized * moveSpeed * movementMultiplier; }
-        else { movement = moveDirection.normalized * moveSpeed * movementMultiplier * airMultiplier; }
+        else if (isGrounded && OnSlope()) 
+        { 
+            movement = slopeMoveDirection.normalized * moveSpeed * movementMultiplier; 
+        }
+        else if (!isGrounded) 
+        { 
+            movement = moveDirection.normalized * moveSpeed * movementMultiplier * airMultiplier;
+        }
 
         // Move
         rb.AddForce(movement, ForceMode.Acceleration);
     }
 
+    // Smoothly transition between speeds (controlled by acceleration)
     private void ControlSpeed() 
     {
         if (pInput.sprinting && isGrounded)
@@ -114,15 +122,18 @@ public class PlayerMovement : MonoBehaviour
         else { rb.drag = airdrag; }
     }
 
-    private bool OnSlope() 
+    private bool OnSlope()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight / 2 + 0.5f)) 
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight / 2 + 0.5f))
         {
-            if (slopeHit.normal != Vector3.up) 
+            if (slopeHit.normal != Vector3.up)
             {
                 return true;
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
         return false;
     }

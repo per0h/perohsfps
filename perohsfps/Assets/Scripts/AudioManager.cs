@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using Random=UnityEngine.Random;
 
 // Thanks Brackeys
 
@@ -43,17 +44,24 @@ public class AudioManager : MonoBehaviour
 
     void Start() 
     {
-        Play("WildWest_1"); // Temporary workaround for music
+        Play("Music.WildWest_1"); // Temporary workaround for music
     }
 
     // Play audio by name
     public void Play(string name) 
     {
+        // TO-DO: Create own arrays in separate scripts and pass through args?
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null) 
         {
             Debug.LogWarning("Sound: " + name + " not found!");
         }
+        s.source.Play();
+    }
+
+    public void PlayRandom(Sound[] sounds) 
+    {
+        Sound s = sounds[Random.Range(0, sounds.Length)];
         s.source.Play();
     }
 }
