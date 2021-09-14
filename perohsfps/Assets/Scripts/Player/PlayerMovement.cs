@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    private PlayerInput pInput;
+    private PlayerInput playerInput;
     private Rigidbody rb;
     private Vector3 moveDirection;
     private float playerHeight;
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        pInput = GetComponent<PlayerInput>();
+        playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
         playerHeight = GetComponent<Collider>().bounds.size.y;
     }
@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // Using transform.forward and transform.right to move where the player is looking
-        moveDirection = transform.forward * pInput.y + transform.right * pInput.x;
+        moveDirection = transform.forward * playerInput.y + transform.right * playerInput.x;
 
         // Check if grounded
         // to-do: improve ground checks + add slope support
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         ControlDrag(groundDrag, airDrag);
 
         // Jumping
-        if (pInput.jumping && isGrounded) { Jump(); }
+        if (playerInput.jumping && isGrounded) { Jump(); }
     }
 
     private void Jump() 
@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
     // Smoothly transition between speeds (controlled by acceleration)
     private void ControlSpeed() 
     {
-        if (pInput.sprinting && isGrounded)
+        if (playerInput.sprinting && isGrounded)
         {
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration * Time.deltaTime);
         }

@@ -192,7 +192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 309757850}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 672773199}
   - component: {fileID: 672773198}
   - component: {fileID: 672773197}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Amogus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -699,7 +699,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 911607824}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1011,8 +1011,9 @@ GameObject:
   - component: {fileID: 1755134613}
   - component: {fileID: 1755134612}
   - component: {fileID: 1755134618}
+  - component: {fileID: 1755134619}
   - component: {fileID: 1755134617}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1132,6 +1133,7 @@ MonoBehaviour:
   jumping: 0
   sprinting: 0
   crouching: 0
+  shooting: 0
 --- !u!114 &1755134618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1161,6 +1163,23 @@ MonoBehaviour:
     m_Bits: 64
   groundDrag: 6
   airDrag: 2
+--- !u!114 &1755134619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755134611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb78605072984c24d84f68d1fd91b133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 1228358242}
+  weapon: {fileID: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 87
 --- !u!1 &2143208203
 GameObject:
   m_ObjectHideFlags: 0
