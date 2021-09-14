@@ -12,7 +12,9 @@ public class PlayerMovement : MonoBehaviour
     private float playerHeight;
 
     [Header("Movement")]
-    [SerializeField] private float moveSpeed; // Serialized so I can see current speed in playmode, don't change
+    [SerializeField] private float moveSpeed; // Serialized so I can see it in playmode
+    public float currentSpeed;
+    public float forwardSpeed;
     public float movementMultiplier = 10f;
     public float airMultiplier = 0.5f;
     public float extraGravity = 10f;
@@ -59,6 +61,9 @@ public class PlayerMovement : MonoBehaviour
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
 
         OnSlope();
+
+        var localVelocity = transform.InverseTransformDirection(rb.velocity);
+        forwardSpeed = localVelocity.z;
     }
 
     void FixedUpdate() 

@@ -1,14 +1,25 @@
+using System;
 using UnityEngine;
 
 public class FPSCamera : MonoBehaviour
 {
+
+    [Header("Player")]
     public Transform playerHead;
     public Transform player;
+    public PlayerMovement playerMovement;
 
+    [Header("Mouse")]
     [Range(0.1f, 100f)]
     public float sens = 1f;
     public float sensMultiplier = 100f;
     float xRotation = 0f;
+
+    [Header("Camera")]
+    public Camera cam;
+    [SerializeField] private float minFov = 90f;
+    [SerializeField] private float maxFov = 115f;
+    [SerializeField] private float FovSpeed = 0.11f;
 
     void Start() 
     {
@@ -22,6 +33,16 @@ public class FPSCamera : MonoBehaviour
         gameObject.transform.position = playerHead.transform.position;
 
         Look();
+
+        // Increase FOV if above x speed
+        if (playerMovement.forwardSpeed > playerMovement.maxSpeed * 0.8)
+        {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, maxFov, FovSpeed);
+        }
+        else if (cam.fieldOfView > minFov)
+        {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, minFov, FovSpeed);
+        }
     }
 
     private void Look() 
