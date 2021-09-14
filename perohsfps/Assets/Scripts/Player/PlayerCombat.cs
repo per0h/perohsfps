@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     private PlayerInput playerInput;
+
+    [SerializeField]
+    private float health;
     
     [SerializeField]
     private Transform cam;
