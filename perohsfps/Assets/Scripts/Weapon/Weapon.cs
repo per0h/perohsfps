@@ -1,25 +1,26 @@
 using UnityEngine;
 
-[System.Serializable]
-public class Weapon : MonoBehaviour
+// https://youtu.be/aPXvoWVabPY (Scriptable objects guide)
+
+[CreateAssetMenu(fileName = "New weapon", menuName = "Weapon")]
+public class Weapon : ScriptableObject
 {
     [Header("Info")]
     public int id;
-    public string weaponName;
+    public new string name;
     public GameObject model;
 
     [Header("Stats")]
     public float damage;
-    public float range = 100f;
+    public float range;
     public float fireRate;
     public bool auto;
 
     [Header("Effects")]
-    public AudioClip shootSound;
-    public AudioClip reloadAudio;
+    public string shootSound;
+    public string reloadAudio;
 
     int maxAmmo;
     int ammoInMag;
     bool isReloading;
-    bool canShoot;
 }

@@ -17,8 +17,12 @@ public class FPSCamera : MonoBehaviour
 
     [Header("Camera")]
     public Camera cam;
+
+    [Range(60f, 120f)]
     [SerializeField] private float minFov = 90f;
+    [Range(90f, 180f)]
     [SerializeField] private float maxFov = 115f;
+    [Range(0.01f, 1)]
     [SerializeField] private float FovSpeed = 0.11f;
 
     void Start() 

@@ -20,5 +20,6 @@ public class AI : MonoBehaviour
     public void TakeDamage(float dmg) 
     {
         health -= dmg;
+        Debug.Log("health: " + health);
     }
 }
