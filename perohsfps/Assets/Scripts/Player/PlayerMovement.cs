@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform groundCheck;
     public LayerMask groundMask;
     public bool isGrounded { get; private set; }
-    float groundDistance = 0.4f;
+    public float groundDistance = 0.5f;
 
     [Header("Drag")]
     public float groundDrag = 6f;
