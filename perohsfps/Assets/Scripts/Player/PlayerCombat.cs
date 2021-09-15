@@ -51,7 +51,9 @@ public class PlayerCombat : MonoBehaviour
 
     void Shoot() 
     {
-        if (!_canshoot) return;
+        if (!_canshoot || weapon.isReloading) return;
+
+        MuzzleFlash();
 
         RaycastHit _hit;
         
@@ -59,7 +61,7 @@ public class PlayerCombat : MonoBehaviour
         {
             audioManager.Play(weapon.shootSound); // Gunshot
         
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, 100f, mask)) 
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask)) 
             {
                 // Redesign this code when adding multiplayer
 
@@ -88,13 +90,43 @@ public class PlayerCombat : MonoBehaviour
 
     IEnumerator ShootDelay(float delay)
     {
+        // delay = fire rate
         yield return new WaitForSeconds(delay);
         _canshoot = true;
+    }
+
+    IEnumerator ReloadDelay(float delay)
+    {
+        // delay = reload time
+
+        weapon.isReloading = true;
+        
+        yield return new WaitForSeconds(delay);
+        if (weapon.hasMag) 
+        {
+            // Load whole mag at once
+            weapon.ammoInMag = weapon.maxAmmoInMag;
+        }
+        else 
+        {
+            // Load bullet one by one
+            while (weapon.maxAmmoInMag < weapon.ammoInMag) 
+            {
+                ++weapon.ammoInMag;
+                yield return new WaitForSeconds(delay);
+            }
+        }
     }
 
     void Reload() 
     {
         // Play reload animation
-        // Load whole mag or one bullet at a time based on gun
+
+        StartCoroutine(ReloadDelay(weapon.reloadTime));
+    }
+
+    void MuzzleFlash() 
+    {
+        //weapon.muzzleFlash.Play();
     }
 }
