@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 // https://youtu.be/aPXvoWVabPY (Scriptable objects guide)
 
@@ -16,11 +17,18 @@ public class Weapon : ScriptableObject
     public float fireRate;
     public bool auto;
 
+    [Header("Recoil")]
+    public float initialKickback;
+
     [Header("Effects")]
     public string shootSound;
     public string reloadAudio;
+    public Image muzzleFlashImage;
+    public Sprite[] flashes; // Particle system?
 
-    int maxAmmo;
-    int ammoInMag;
-    bool isReloading;
+    [Header("Ammo")]
+    public int maxAmmoInMag;
+    public int ammoInMag;
+    public bool mag; // true if weapon has mag or has to be reloaded bullet by bullet
+    public float reloadTime; // per mag or per bullet
 }

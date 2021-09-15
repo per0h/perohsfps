@@ -9,7 +9,6 @@ public class PlayerCombat : MonoBehaviour
     [Header("Raycasts")]
     [SerializeField] private Transform cam;
     [SerializeField] private LayerMask mask;
-    [SerializeField] private LayerMask enemy;
     
     [Header("Player")]
     [SerializeField]
@@ -22,11 +21,12 @@ public class PlayerCombat : MonoBehaviour
     [Header("Misc")]
     public AudioManager audioManager;
 
-    private bool canShoot = true;
+    private bool _canshoot = true;
 
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
+        Instantiate(weapon.model, viewModel.position, viewModel.rotation, viewModel); /// TEMPORARY
     }
 
     void Update()
@@ -42,11 +42,16 @@ public class PlayerCombat : MonoBehaviour
 
             if (playerInput.shooting) Shoot();
         }
+
+        if (playerInput.reload && weapon.ammoInMag < weapon.maxAmmoInMag) 
+        {
+            Reload();
+        }
     }
 
     void Shoot() 
     {
-        if (!canShoot) return;
+        if (!_canshoot) return;
 
         RaycastHit _hit;
         
@@ -77,13 +82,19 @@ public class PlayerCombat : MonoBehaviour
             Debug.Log("No weapon");
         }
 
-        canShoot = false;
+        _canshoot = false;
         StartCoroutine(ShootDelay(weapon.fireRate)); // Delay between shots
     }
 
     IEnumerator ShootDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        canShoot = true;
+        _canshoot = true;
+    }
+
+    void Reload() 
+    {
+        // Play reload animation
+        // Load whole mag or one bullet at a time based on gun
     }
 }

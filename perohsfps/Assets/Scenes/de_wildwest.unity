@@ -206,13 +206,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279962879}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.526, y: 0.357, z: 0.43}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.505, y: -0.344, z: 0.769}
+  m_LocalScale: {x: 1, y: 1.1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1755134616}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 963194228}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &290482262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,7 +1137,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 279962880}
   m_Father: {fileID: 1228358242}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1587,7 +1588,6 @@ Transform:
   - {fileID: 911607824}
   - {fileID: 672773196}
   - {fileID: 309757850}
-  - {fileID: 279962880}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1661,9 +1661,6 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 855
-  enemy:
-    serializedVersion: 2
-    m_Bits: 0
   health: 100
   weapon: {fileID: 11400000, guid: 1761b96f0c35132409d7532c6f4bb912, type: 2}
   viewModel: {fileID: 279962880}
@@ -36556,11 +36553,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5198833394265169062, guid: a6769e5fde617e448a0499ff37379c6d, type: 3}
       propertyPath: sounds.Array.data[1].pitch
-      value: 0.91
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5198833394265169062, guid: a6769e5fde617e448a0499ff37379c6d, type: 3}
       propertyPath: sounds.Array.data[0].volume
-      value: 0.045
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: 5198833394265169062, guid: a6769e5fde617e448a0499ff37379c6d, type: 3}
       propertyPath: sounds.Array.data[1].volume
